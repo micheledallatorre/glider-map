@@ -54,7 +54,7 @@ $(document).ready(function() {
 				'</div></p><button name="save-marker" class="save-marker">Salva dettagli punto</button>';
 
 				//Drop a new Marker with our Edit Form
-				create_marker(event.latLng, 'Nuovo punto', EditForm, true, true, true, "http://www.st-qualityproject.it/aliante/icons/pin_green.png");
+				create_marker(event.latLng, 'Nuovo punto', EditForm, true, true, true, "----PATH-TO-YOUR-WEBSITE-ICON-------/icons/pin_green.png");
 			});
 										
 	}
@@ -170,7 +170,7 @@ $(document).ready(function() {
 		  success:function(data){
 				replaceWin.html(data); //replace info window with new html
 				Marker.setDraggable(false); //set marker to fixed
-				Marker.setIcon('http://www.st-qualityproject.it/aliante/icons/pin_blue.png'); //replace icon
+				Marker.setIcon('----PATH-TO-YOUR-WEBSITE-ICON-------/aliante/icons/pin_blue.png'); //replace icon
             },
             error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError); //throw any errors
