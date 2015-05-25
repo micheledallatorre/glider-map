@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	var mapCenter = new google.maps.LatLng(47.6145, -122.3418); //Google map Coordinates
+	var mapCenter = new google.maps.LatLng(46.0700915, 11.1197626); //Google map Coordinates
 	var map;
 	
 	map_initialize(); // initialize google map
@@ -18,14 +18,14 @@ $(document).ready(function() {
 			var googleMapOptions = 
 			{ 
 				center: mapCenter, // map center
-				zoom: 17, //zoom level, 0 = earth view to higher value
+				zoom: 11, //zoom level, 0 = earth view to higher value
 				maxZoom: 18,
-				minZoom: 16,
+				minZoom: 3,
 				zoomControlOptions: {
 				style: google.maps.ZoomControlStyle.SMALL //zoom control size
 			},
 				scaleControl: true, // enable scale control
-				mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
+				mapTypeId: google.maps.MapTypeId.TERRAIN // google map type
 			};
 		
 		   	map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);			
@@ -37,7 +37,7 @@ $(document).ready(function() {
 					  var address 	= '<p>'+ $(this).attr('address') +'</p>';
 					  var type 		= $(this).attr('type');
 					  var point 	= new google.maps.LatLng(parseFloat($(this).attr('lat')),parseFloat($(this).attr('lng')));
-					  create_marker(point, name, address, false, false, false, "http://----PATH-TO-YOUR-WEBSITE-ICON-------/icons/pin_blue.png");
+					  create_marker(point, name, address, false, false, false, "YOUR-WEBSITE-PATH/icons/pin_blue.png");
 				});
 			});	
 			
@@ -46,15 +46,15 @@ $(document).ready(function() {
 				//Edit form to be displayed with new marker
 				var EditForm = '<p><div class="marker-edit">'+
 				'<form action="ajax-save.php" method="POST" name="SaveMarker" id="SaveMarker">'+
-				'<label for="pName"><span>Place Name :</span><input type="text" name="pName" class="save-name" placeholder="Enter Title" maxlength="40" /></label>'+
-				'<label for="pDesc"><span>Description :</span><textarea name="pDesc" class="save-desc" placeholder="Enter Address" maxlength="150"></textarea></label>'+
-				'<label for="pType"><span>Type :</span> <select name="pType" class="save-type"><option value="restaurant">Rastaurant</option><option value="bar">Bar</option>'+
-				'<option value="house">House</option></select></label>'+
+				'<label for="pName"><span>Nome:</span><input type="text" name="pName" class="save-name" placeholder="Inserisci il nome" maxlength="40" /></label>'+
+				'<label for="pDesc"><span>Descrizione:</span><textarea name="pDesc" class="save-desc" placeholder="Inserisci la descrizione" maxlength="150"></textarea></label>'+
+				'<label for="pType"><span>Tipo:</span> <select name="pType" class="save-type"><option value="aeroporto">Aeroporto</option><option value="pilone">Pilone</option>'+
+				'<option value="altro">Altro</option></select></label>'+
 				'</form>'+
-				'</div></p><button name="save-marker" class="save-marker">Save Marker Details</button>';
+				'</div></p><button name="save-marker" class="save-marker">Salva dettagli punto</button>';
 
 				//Drop a new Marker with our Edit Form
-				create_marker(event.latLng, 'New Marker', EditForm, true, true, true, "http://----PATH-TO-YOUR-WEBSITE-ICON-------/icons/pin_green.png");
+				create_marker(event.latLng, 'Nuovo punto', EditForm, true, true, true, "http://www.st-qualityproject.it/aliante/icons/pin_green.png");
 			});
 										
 	}
@@ -78,7 +78,7 @@ $(document).ready(function() {
 		'<div class="marker-inner-win"><span class="info-content">'+
 		'<h1 class="marker-heading">'+MapTitle+'</h1>'+
 		MapDesc+ 
-		'</span><button name="remove-marker" class="remove-marker" title="Remove Marker">Remove Marker</button>'+
+		'</span><button name="remove-marker" class="remove-marker" title="Remove Marker">Rimuovi punto</button>'+
 		'</div></div>');	
 
 		
@@ -107,14 +107,14 @@ $(document).ready(function() {
 				
 				if(mName =='' || mDesc =='')
 				{
-					alert("Please enter Name and Description!");
+					alert("Per piacere inserisci nome e descrizione!");
 				}else{
 					save_marker(marker, mName, mDesc, mType, mReplace); //call save marker function
 				}
 			});
 		}
 		
-		//add click listner to save marker button		 
+		//add click listener to save marker button		 
 		google.maps.event.addListener(marker, 'click', function() {
 				infowindow.open(map,marker); // click on marker opens info window 
 	    });
@@ -170,7 +170,7 @@ $(document).ready(function() {
 		  success:function(data){
 				replaceWin.html(data); //replace info window with new html
 				Marker.setDraggable(false); //set marker to fixed
-				Marker.setIcon('http://----PATH-TO-YOUR-WEBSITE-ICON-------/icons/pin_blue.png'); //replace icon
+				Marker.setIcon('http://www.st-qualityproject.it/aliante/icons/pin_blue.png'); //replace icon
             },
             error:function (xhr, ajaxOptions, thrownError){
                 alert(thrownError); //throw any errors
@@ -185,7 +185,7 @@ $(document).ready(function() {
 h1.heading{padding:0px;margin: 0px 0px 10px 0px;text-align:center;font: 18px Georgia, "Times New Roman", Times, serif;}
 
 /* width and height of google map */
-#google_map {width: 90%; height: 500px;margin-top:0px;margin-left:auto;margin-right:auto;}
+#google_map {width: 90%; height: 800px;margin-top:30px;margin-left:auto;margin-right:auto;}
 
 /* Marker Edit form */
 .marker-edit label{display:block;margin-bottom: 5px;}
@@ -204,8 +204,8 @@ button.save-marker, button.remove-marker{border: none;background: rgba(0, 0, 0, 
 </style>
 </head>
 <body>             
-<h1 class="heading">My Google Map</h1>
-<div align="center">Right Click to Drop a New Marker</div>
+<h1 class="heading">Mappa TEST aliante</h1>
+<div align="center">Clicca con il tasto destro del mouse per aggiungere un nuovo punto alla mappa!</div>
 <div id="google_map"></div>
 </body>
 </html>
